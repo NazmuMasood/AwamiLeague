@@ -1,4 +1,4 @@
-package com.example.awamileague;
+package com.nazmu.awamileague;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.awamileague", appContext.getPackageName());
+        assertEquals("com.nazmu.awamileague", appContext.getPackageName());
     }
 }

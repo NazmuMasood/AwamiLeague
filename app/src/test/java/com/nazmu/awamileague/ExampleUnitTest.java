@@ -1,4 +1,4 @@
-package com.example.awamileague;
+package com.nazmu.awamileague;
 
 import org.junit.Test;
 

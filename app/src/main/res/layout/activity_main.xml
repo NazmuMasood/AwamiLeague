@@ -63,8 +63,8 @@
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true">
 
-                            <com.example.awamileague.CircleFillView
-                                xmlns:custom="http://schemas.android.com/apk/res/com.example.awamileague"
+                            <com.nazmu.awamileague.CircleFillView
+                                xmlns:custom="http://schemas.android.com/apk/res/com.nazmu.awamileague"
                                 android:id="@+id/circleFillView"
                                 android:layout_width="96dp"
                                 android:layout_height="96dp"
@@ -76,7 +76,7 @@
                                 custom:mStrokeColor="#D62215"
                                 custom:mStrokeWidth="0">
 
-                            </com.example.awamileague.CircleFillView>
+                            </com.nazmu.awamileague.CircleFillView>
 
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:id="@+id/progressBarIV"
