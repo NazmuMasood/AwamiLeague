@@ -1,23 +1,35 @@
 package com.example.awamileague;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import com.google.android.material.navigation.NavigationView;
+
 public class MainActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
     WebView webView;
     SwipeRefreshLayout swipeLayout;
+    //String BANGLA_FONT_SOLAIMAN_LIPI = "fonts/SolaimanLipi_22-02-2012.ttf";
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         webView = findViewById(R.id.webView);
         swipeLayout = findViewById(R.id.swipeLayout);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        navigationView = findViewById(R.id.nav_view);
+
         progressBar.setProgress(100);
 
         //Loading the web-page url
@@ -63,30 +78,70 @@ public class MainActivity extends AppCompatActivity {
                 webView.reload();
             }
         });
+
+        //Setting up bangla font
+        //Typeface tf = Typeface.createFromAsset(getAssets(),BANGLA_FONT_SOLAIMAN_LIPI);
+
+        //Setting up custom toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        //Setting up the navigation drawer
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout,
+                toolbar,R.string.nav_drawer_open, R.string.nav_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        //Setting up the navigation view i.e. nav_menu
+        navigationView.setCheckedItem(R.id.nav_home_url);
+
+        //Handling the navigation view inputs
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.nav_home_url:
+                        webView.loadUrl("https://www.albd.com.bd/");
+                        break;
+                    case R.id.nav_sign_up:
+                        webView.loadUrl("https://albd.com.bd/members/registration");
+                        break;
+                    case R.id.nav_login:
+                        webView.loadUrl("https://albd.com.bd/members/login");
+                        break;
+                }
+                drawerLayout.closeDrawer(GravityCompat.START);
+
+                return true;
+            }
+        });
+
     }
 
     @Override
     public void onBackPressed() {
-        if (webView.canGoBack()) {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else if (webView.canGoBack()) {
             webView.goBack();
         } else {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setTitle(null);
-            dialog.setMessage("Do you really want to exit?");
-            dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            dialog.setMessage(R.string.close_alert_question);
+            dialog.setPositiveButton(R.string.close_alert_yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     finish();
                 }
             });
             dialog.setCancelable(false);
-            dialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            dialog.setNegativeButton(R.string.close_alert_no, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
             }).show();
-
         }
     }
 }

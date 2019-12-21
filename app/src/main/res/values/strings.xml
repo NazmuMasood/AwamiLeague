@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Bangladesh Awami League</string>
+
+    <string name="app_name_bangla">বাংলাদেশ আওয়ামী লীগ</string>
+    <string name="app_nav_sign_up_bangla">নিবন্ধন</string>
+    <string name="app_nav_login_bangla">লগইন</string>
+
+    <string name="nav_drawer_open">Open navigation drawer</string>
+    <string name="nav_drawer_close">Close navigation drawer</string>
+
+    <string name="close_alert_question">আপনি কি সত্যিই অ্যাপটি ত্যাগ করতে চান?</string>
+    <string name="close_alert_yes">হ্যাঁ</string>
+    <string name="close_alert_no">না</string>
 </resources>
