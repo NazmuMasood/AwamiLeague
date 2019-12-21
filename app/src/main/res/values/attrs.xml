@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleFillView" >
+        <attr name="FillColor" format="color" />
+        <attr name="mStrokeColor" format="color"/>
+        <attr name="mStrokeWidth" format="float" />
+        <attr name="Value" format="integer" />
+    </declare-styleable>
+</resources>

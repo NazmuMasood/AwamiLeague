@@ -18,18 +18,20 @@ import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    ProgressBar progressBar;
+    ProgressBar progressBar; ImageView progressBarIV;
     WebView webView;
     SwipeRefreshLayout swipeLayout;
     //String BANGLA_FONT_SOLAIMAN_LIPI = "fonts/SolaimanLipi_22-02-2012.ttf";
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    CircleFillView circleFill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +40,12 @@ public class MainActivity extends AppCompatActivity {
 
         //Getting the layout variables
         progressBar = findViewById(R.id.progressBar);
+        progressBarIV = findViewById(R.id.progressBarIV);
         webView = findViewById(R.id.webView);
         swipeLayout = findViewById(R.id.swipeLayout);
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.nav_view);
+        circleFill = (CircleFillView) findViewById(R.id.circleFillView);
 
         progressBar.setProgress(100);
 
@@ -54,12 +58,17 @@ public class MainActivity extends AppCompatActivity {
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 progressBar.setVisibility(View.VISIBLE);
+                circleFill.setVisibility(View.VISIBLE);
+                progressBarIV.setVisibility(View.VISIBLE);
+                swipeLayout.setRefreshing(false);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 progressBar.setVisibility(View.GONE);
+                circleFill.setVisibility(View.GONE);
+                progressBarIV.setVisibility(View.GONE);
                 swipeLayout.setRefreshing(false);
             }
         });
@@ -69,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
                 progressBar.setProgress(newProgress);
+                circleFill.setValue(newProgress);
             }
         });
 
