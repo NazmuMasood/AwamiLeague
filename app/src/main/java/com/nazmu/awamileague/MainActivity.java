@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     CircleFillView circleFill;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,11 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.nav_view);
         circleFill = (CircleFillView) findViewById(R.id.circleFillView);
+        toolbar = findViewById(R.id.toolbar);
+
+        //Setting up the toolbar with a custom app-title
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.app_name_bangla);
 
         progressBar.setProgress(100);
 
