@@ -1,6 +1,9 @@
 package com.nazmu.awamileague;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -81,18 +84,40 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
+                swipeLayout.setRefreshing(false);
                 progressBar.setVisibility(View.VISIBLE);
                 circleFill.setVisibility(View.VISIBLE);
                 progressBarIV.setVisibility(View.VISIBLE);
-                swipeLayout.setRefreshing(false);
+
+                //manually setting the progress of the progress bar
+                ValueAnimator animator = ValueAnimator.ofInt(0, progressBar.getMax());
+                animator.setDuration(1000);
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation){
+                        progressBar.setProgress((Integer)animation.getAnimatedValue());
+                        circleFill.setValue((Integer)animation.getAnimatedValue());
+                    }
+                });
+                animator.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        // start your activity here
+                        progressBar.setVisibility(View.GONE);
+                        circleFill.setVisibility(View.GONE);
+                        progressBarIV.setVisibility(View.GONE);
+                    }
+                });
+                animator.start();
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                progressBar.setVisibility(View.GONE);
-                circleFill.setVisibility(View.GONE);
-                progressBarIV.setVisibility(View.GONE);
+                //progressBar.setVisibility(View.GONE);
+                //circleFill.setVisibility(View.GONE);
+                //progressBarIV.setVisibility(View.GONE);
                 swipeLayout.setRefreshing(false);
             }
         });
@@ -148,10 +173,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
-                progressBar.setProgress(newProgress);
-                circleFill.setValue(newProgress);
-
-
+                //progressBar.setProgress(newProgress);
+                //circleFill.setValue(newProgress);
             }
         });
 
@@ -278,13 +301,13 @@ public class MainActivity extends AppCompatActivity {
     class MyWebChromeClient extends WebChromeClient {
         // For 3.0+ Devices (Start)
         // onActivityResult attached before constructor
-        protected void openFileChooser(ValueCallback uploadMsg, String acceptType) {
+        /*protected void openFileChooser(ValueCallback uploadMsg, String acceptType) {
             mUploadMessage = uploadMsg;
             Intent i = new Intent(Intent.ACTION_GET_CONTENT);
             i.addCategory(Intent.CATEGORY_OPENABLE);
             i.setType("image/*");
             startActivityForResult(Intent.createChooser(i, "File Chooser"), FILECHOOSER_RESULTCODE);
-        }
+        }*/
 
 
         // For Lollipop 5.0+ Devices
@@ -309,21 +332,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //For Android 4.1 only
-        protected void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
+        /*protected void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
             mUploadMessage = uploadMsg;
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
             intent.addCategory(Intent.CATEGORY_OPENABLE);
             intent.setType("image/*");
             startActivityForResult(Intent.createChooser(intent, "File Chooser"), FILECHOOSER_RESULTCODE);
-        }
+        }*/
 
-        protected void openFileChooser(ValueCallback<Uri> uploadMsg) {
+        /*protected void openFileChooser(ValueCallback<Uri> uploadMsg) {
             mUploadMessage = uploadMsg;
             Intent i = new Intent(Intent.ACTION_GET_CONTENT);
             i.addCategory(Intent.CATEGORY_OPENABLE);
             i.setType("image/*");
             startActivityForResult(Intent.createChooser(i, "File Chooser"), FILECHOOSER_RESULTCODE);
-        }
+        }*/
     }
 
     @Override

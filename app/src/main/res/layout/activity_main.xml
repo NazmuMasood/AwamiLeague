@@ -112,7 +112,14 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/drawer_header"
-        app:menu="@menu/drawer_menu">
+        app:menu="@menu/drawer_menu"
+        app:theme="@style/NavigationDrawerStyle">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="100dp"/>
 
     </com.google.android.material.navigation.NavigationView>
 

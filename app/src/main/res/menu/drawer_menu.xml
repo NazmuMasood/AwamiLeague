@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/menu_item1"
+        android:checkableBehavior="single">
         <item android:id="@+id/nav_home_url"
               android:title="@string/app_name_bangla"/>
+    </group>
+
+    <group
+        android:id="@+id/menu_item2"
+        android:checkableBehavior="single">
         <item android:id="@+id/nav_sign_up"
             android:title="@string/app_nav_sign_up_bangla"/>
+    </group>
+
+    <group
+        android:id="@+id/menu_item3"
+        android:checkableBehavior="single">
         <item android:id="@+id/nav_login"
             android:title="@string/app_nav_login_bangla"/>
     </group>
