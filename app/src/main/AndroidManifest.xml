@@ -15,6 +15,7 @@
         android:label="@string/app_name_bangla"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/CustomTheme">
         <activity android:name="com.nazmu.awamileague.MainActivity"
                 android:configChanges="orientation|screenSize|keyboardHidden">
