@@ -81,7 +81,7 @@
                                 custom:FillColor="#FFFFFF"
                                 custom:Value="0"
                                 custom:mStrokeColor="#D62215"
-                                custom:mStrokeWidth="0">
+                                custom:mStrokeWidth="2">
 
                             </com.nazmu.awamileague.CircleFillView>
 
